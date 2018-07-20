@@ -1,8 +1,8 @@
 
 # RateConditionsMonitor
-There are several libraries for rating, but all of them rely on good-old AlertDialog, and leaves no area for customization; as it doesn't expose it's internal conditions-checking-api.
+There are several libraries for rating, but all of them force using AlertDialog, and leaves no area for customization; as it doesn't expose it's internal conditions-checking-api.
 
- This library does just that: a rating-conditions-checking-api that leaves the UI part on the developer; now that creating AlertDialog is trivial thanks to projects like [Anko](https://github.com/Kotlin/anko).
+ This library does just that: a rating-conditions-checking-api that leaves the UI part on the developer.
 
  [![](https://jitpack.io/v/mhashim6/RateConditionsMonitor.svg)](https://jitpack.io/#mhashim6/RateConditionsMonitor)
 
