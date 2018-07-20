@@ -2,7 +2,10 @@
 # RateConditionsMonitor
 There are several libraries for rating, but all of them rely on good-old AlertDialog, and leaves no area for customization; as it doesn't expose it's internal conditions-checking-api.
 
- This library does just that: a rating-conditions-checking-api that leaves the UI part on the developer; now that creating AlertDialog is now trivial thanks to projects like Anko.
+ This library does just that: a rating-conditions-checking-api that leaves the UI part on the developer; now that creating AlertDialog is now trivial thanks to projects like [Anko](https://github.com/Kotlin/anko).
+
+ [![](https://jitpack.io/v/mhashim6/RateConditionsMonitor.svg)](https://jitpack.io/#mhashim6/RateConditionsMonitor)
+
 ## Usage:
 
 initialize the library at a starting point in your app :
@@ -34,4 +37,27 @@ rate_btn.setOnClickListener {
          }
       }.show()
 }
+```
+Make sure to check the [sample](https://github.com/mhashim6/RateConditionsMonitor/blob/master/app/src/main/java/mhashim6/android/ratemonitorsample/MainActivity.kt).
+
+---
+
+## Dependency:
+Add it in your root build.gradle at the end of repositories:
+
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+**Step 2.**  Add the dependency
+
+```css
+	dependencies {
+	        implementation 'com.github.mhashim6:RateConditionsMonitor:1.0'
+	}
 ```
