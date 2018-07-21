@@ -13,10 +13,11 @@ initialize the library at a starting point in your app :
 ```kotlin
 RateConditionsMonitor.apply {
       init(context = this@MainActivity)
-      applyConditions(launchTimes = 3, remindTimes = 7)
+      applyConditions(launchTimes = 3, remindTimes = 7, debug = true)
 
       //launchTimes: how many app launches it takes to ask for rating.
       //remindTimes: how many app launches it takes to ask for rating after RateConditionsMonitor.later() is called.
+      //debug: if true: RateConditionsMonitor.isConditionsMet is also true.
 }
 ```
  then in a check point in your app, check if conditions are met:
