@@ -49,12 +49,15 @@ object RateConditionsMonitor {
         }
 
     val isConditionsMet: Boolean
-        get() = conditions.debug || monitorPref
-                && (launchTimesPref >= conditions.launchTimes)
-                && (!reminderModePref || (remindTimesPref >= conditions.remindTimes))
+        get() = Conditions.debug || monitorPref
+                && (launchTimesPref >= Conditions.launchTimes)
+                && (!reminderModePref || (remindTimesPref >= Conditions.remindTimes))
 
-
-    private val conditions = RateConditions(launchTimes = 3, remindTimes = 7, debug = false)
+    private object Conditions {
+        var launchTimes = 3
+        var remindTimes = 7
+        var debug = false
+    }
 
     fun init(context: Context) {
         preferences = context.defaultSharedPreferences
@@ -65,7 +68,7 @@ object RateConditionsMonitor {
     }
 
     fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
-        conditions.apply {
+        Conditions.apply {
             this.launchTimes = launchTimes
             this.remindTimes = remindTimes
             this.debug = debug
@@ -85,8 +88,6 @@ object RateConditionsMonitor {
         remindTimesPref = 0
         reminderModePref = true
     }
-
-    private class RateConditions(var launchTimes: Int, var remindTimes: Int, var debug: Boolean)
 
     @SuppressLint("ApplySharedPref")
     private inline fun SharedPreferences.edit(
