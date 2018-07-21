@@ -14,7 +14,7 @@ object RateConditionsMonitor {
 
     private lateinit var preferences: SharedPreferences
 
-    private var launchTimes
+    private var launchTimesPref
         get() = preferences.getInt(LAUNCH_TIMES, 0)
         set(value) {
             preferences.edit {
@@ -22,7 +22,7 @@ object RateConditionsMonitor {
             }
         }
 
-    private var remindTimes
+    private var remindTimesPref
         get() = preferences.getInt(REMIND_TIMES, 0)
         set(value) {
             preferences.edit {
@@ -30,7 +30,7 @@ object RateConditionsMonitor {
             }
         }
 
-    private var monitor
+    private var monitorPref
         get() = preferences.getBoolean(MONITOR, true)
         set(value) {
             preferences.edit {
@@ -39,7 +39,7 @@ object RateConditionsMonitor {
 
         }
 
-    private var reminderMode
+    private var reminderModePref
         get() = preferences.getBoolean(REMINDER_MODE, false)
         set(value) {
             preferences.edit {
@@ -49,40 +49,44 @@ object RateConditionsMonitor {
         }
 
     val isConditionsMet: Boolean
-        get() = monitor
-                && (launchTimes >= conditions.launchTimes)
-                && (!reminderMode || (remindTimes >= conditions.remindTimes))
+        get() = conditions.debug || monitorPref
+                && (launchTimesPref >= conditions.launchTimes)
+                && (!reminderModePref || (remindTimesPref >= conditions.remindTimes))
 
 
-    private var conditions = RateConditions(launchTimes = 3, remindTimes = 7)
+    private val conditions = RateConditions(launchTimes = 3, remindTimes = 7, debug = false)
 
     fun init(context: Context) {
         preferences = context.defaultSharedPreferences
 
-        launchTimes++
-        if (reminderMode)
-            remindTimes++
+        launchTimesPref++
+        if (reminderModePref)
+            remindTimesPref++
     }
 
-    fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 5) {
-        conditions = RateConditions(launchTimes, remindTimes)
+    fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
+        conditions.apply {
+            this.launchTimes = launchTimes
+            this.remindTimes = remindTimes
+            this.debug = debug
+        }
     }
 
     fun rated() {
-        monitor = false
-        reminderMode = false
+        monitorPref = false
+        reminderModePref = false
     }
 
     fun denied() {
-        monitor = false
+        monitorPref = false
     }
 
     fun later() {
-        remindTimes = 0
-        reminderMode = true
+        remindTimesPref = 0
+        reminderModePref = true
     }
 
-    private class RateConditions(val launchTimes: Int, val remindTimes: Int)
+    private class RateConditions(var launchTimes: Int, var remindTimes: Int, var debug: Boolean)
 
     @SuppressLint("ApplySharedPref")
     private inline fun SharedPreferences.edit(
