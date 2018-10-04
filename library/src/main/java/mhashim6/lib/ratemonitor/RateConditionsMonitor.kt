@@ -59,6 +59,11 @@ object RateConditionsMonitor {
         var debug = false
     }
 
+    fun init(context: Context, block: RateConditionsMonitor.() -> Unit) {
+        init(context)
+        apply(block)
+    }
+
     fun init(context: Context) {
         preferences = context.defaultSharedPreferences
 

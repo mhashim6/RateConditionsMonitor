@@ -11,8 +11,7 @@ There are several libraries for rating, but all of them force using AlertDialog,
 initialize the library at a starting point in your app :
 
 ```kotlin
-RateConditionsMonitor.apply {
-      init(context = this@MainActivity)
+RateConditionsMonitor.init(context = this@MainActivity) {
       applyConditions(launchTimes = 3, remindTimes = 7, debug = true)
 
       //launchTimes: how many app launches it takes to ask for rating.
