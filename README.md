@@ -58,6 +58,6 @@ Add it in your root build.gradle at the end of repositories:
 
 ```css
 	dependencies {
-	        implementation 'com.github.mhashim6:RateConditionsMonitor:1.0'
+	        implementation 'com.github.mhashim6:RateConditionsMonitor:1.2'
 	}
 ```
