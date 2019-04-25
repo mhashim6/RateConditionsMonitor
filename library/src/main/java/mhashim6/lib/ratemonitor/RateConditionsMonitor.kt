@@ -59,17 +59,14 @@ object RateConditionsMonitor {
         var debug = false
     }
 
-    fun init(context: Context, block: RateConditionsMonitor.() -> Unit) {
-        init(context)
-        apply(block)
-    }
-
-    fun init(context: Context) {
+    fun setup(context: Context, initializer: RateConditionsMonitor.() -> Unit = {}) {
         preferences = context.defaultSharedPreferences
 
         launchTimesPref++
         if (reminderModePref)
             remindTimesPref++
+
+        this.initializer()
     }
 
     fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
