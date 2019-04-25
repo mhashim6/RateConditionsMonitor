@@ -3,6 +3,7 @@ package mhashim6.lib.ratemonitor
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import org.jetbrains.anko.defaultSharedPreferences
 
 object RateConditionsMonitor {
 
@@ -59,7 +60,7 @@ object RateConditionsMonitor {
     }
 
     fun setup(context: Context, block: RateConditionsMonitor.() -> Unit = {}) {
-        setup(context)
+        preferences = context.defaultSharedPreferences
         apply(block)
     }
 
