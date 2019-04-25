@@ -3,7 +3,6 @@ package mhashim6.lib.ratemonitor
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import org.jetbrains.anko.defaultSharedPreferences
 
 object RateConditionsMonitor {
 
@@ -59,17 +58,9 @@ object RateConditionsMonitor {
         var debug = false
     }
 
-    fun init(context: Context, block: RateConditionsMonitor.() -> Unit) {
-        init(context)
+    fun setup(context: Context, block: RateConditionsMonitor.() -> Unit = {}) {
+        setup(context)
         apply(block)
-    }
-
-    fun init(context: Context) {
-        preferences = context.defaultSharedPreferences
-
-        launchTimesPref++
-        if (reminderModePref)
-            remindTimesPref++
     }
 
     fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
