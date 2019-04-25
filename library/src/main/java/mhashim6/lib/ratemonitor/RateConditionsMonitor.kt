@@ -59,9 +59,9 @@ object RateConditionsMonitor {
         var debug = false
     }
 
-    fun setup(context: Context, block: RateConditionsMonitor.() -> Unit = {}) {
+    fun setup(context: Context, initializer: RateConditionsMonitor.() -> Unit = {}) {
         preferences = context.defaultSharedPreferences
-        apply(block)
+        this.initializer()
     }
 
     fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
