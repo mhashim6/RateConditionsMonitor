@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RateConditionsMonitor.init(context = this@MainActivity) {
+        RateConditionsMonitor.setup(context = this@MainActivity) {
             applyConditions(launchTimes = 0, remindTimes = 2)
         }
 
