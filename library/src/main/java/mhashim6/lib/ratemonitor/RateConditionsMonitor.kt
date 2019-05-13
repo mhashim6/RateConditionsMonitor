@@ -49,15 +49,13 @@ object RateConditionsMonitor {
         }
 
     val isConditionsMet: Boolean
-        get() = Conditions.debug || monitorPref
-                && (launchTimesPref >= Conditions.launchTimes)
-                && (!reminderModePref || (remindTimesPref >= Conditions.remindTimes))
+        get() = debug || monitorPref
+                && (launchTimesPref >= launchTimes)
+                && (!reminderModePref || (remindTimesPref >= remindTimes))
 
-    private object Conditions {
-        var launchTimes = 3
-        var remindTimes = 7
-        var debug = false
-    }
+    private var launchTimes = 3
+    private var remindTimes = 7
+    private var debug = false
 
     fun setup(context: Context, initializer: RateConditionsMonitor.() -> Unit = {}) {
         preferences = context.defaultSharedPreferences
@@ -70,11 +68,9 @@ object RateConditionsMonitor {
     }
 
     fun applyConditions(launchTimes: Int = 3, remindTimes: Int = 7, debug: Boolean = false) {
-        Conditions.apply {
-            this.launchTimes = launchTimes
-            this.remindTimes = remindTimes
-            this.debug = debug
-        }
+        this.launchTimes = launchTimes
+        this.remindTimes = remindTimes
+        this.debug = debug
     }
 
     fun rated() {
