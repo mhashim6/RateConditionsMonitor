@@ -1,9 +1,21 @@
+
+ext {
+    PUBLISH_GROUP_ID = 'mhashim6.android.lib'
+    PUBLISH_ARTIFACT_ID = 'snackbar-queue'
+    PUBLISH_VERSION = '1.1'
+}
+
+
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
 
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "$PUBLISH_GROUP_ID.$PUBLISH_ARTIFACT_ID"]
+    }
 
     defaultConfig {
         minSdkVersion 16
